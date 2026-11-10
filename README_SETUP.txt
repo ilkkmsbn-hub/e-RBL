@@ -1,76 +1,29 @@
-e-LocalPreceptor — Neocities + Google Sheet Backend
-===================================================
+e-SO — STRUKTUR FRONTEND RINGKAS
 
 STRUKTUR
-1. Neocities (frontend):
-   index.html
-   config.js
-   assets/app.css
-   assets/app.js
+index.html
+config.js
+README_SETUP.txt
+assets/
+  app.css
+  app.js
 
-2. Google Apps Script (backend):
-   Code.gs
+Pakej ini menggantikan folder public dalam pakej webhosting yang diberi sebelum ini.
+Semua paparan menggunakan index.html:
+- Login: index.html
+- Dashboard: index.html?app=1
+- Pengesahan waris: index.html?waris=TOKEN
 
-3. Google Spreadsheet:
-   Sheet utama: Data Local Preceptor
-   Sheet Admin: Admin
+1. Simpan sandaran frontend sedia ada.
+2. Gantikan kandungan folder public dengan fail dalam pakej ini.
+3. Kekalkan folder functions, relay, netlify, worker dan konfigurasi hosting daripada pakej terdahulu. Relay masih diperlukan; memuat naik frontend sahaja tidak menyediakan API.
+4. Dalam config.js, gunakan apiUrl: './api' untuk Cloudflare Pages/Netlify dengan relay pada projek sama. Untuk GitHub Pages, gunakan URL penuh Worker yang telah disediakan.
+5. Deploy/redeploy frontend dan relay melalui kaedah hosting yang sama seperti sebelum ini.
+6. Backend Apps Script dan rahsia API tidak perlu diubah bagi menggunakan frontend ini. Fungsi pembatalan dan kawalan peranan kekal.
+7. API terdahulu menghasilkan pautan waris berakhir app.html; frontend ini menukarnya kepada index.html sebelum dipaparkan/dikongsi. Pautan lama yang telah dikongsi dengan app.html perlu diganti kepada index.html dengan token yang sama. Jika perlu menyokong pautan lama secara automatik, sediakan redirect app.html ke index.html pada hosting anda.
+8. Kosongkan cache/muat semula selepas deploy. Login, permohonan, pembatalan dan pengesahan waris perlu diuji pada hosting sebenar.
 
-LANGKAH A — GOOGLE APPS SCRIPT
-1. Buka Google Spreadsheet e-LocalPreceptor.
-2. Extensions > Apps Script.
-3. Gantikan Code.gs dengan fail Code.gs dalam pakej ini.
-4. Save.
-5. Jalankan setupSystem() sekali dan beri permission Google.
-6. Semak sheet Admin. Akaun contoh jika sheet Admin baharu ialah:
-      USER_ID: admin
-      PASSWORD: 1234
-   TUKAR PASSWORD ini sebelum sistem digunakan.
-7. Selepas password ditukar, jalankan hashAdminPasswords() sekali.
-8. Deploy > New deployment > Web app.
-9. Execute as: Me.
-10. Who has access: Anyone (atau tetapan paling sesuai yang membolehkan frontend Neocities mengakses API tanpa login Google).
-11. Deploy dan salin URL yang berakhir dengan /exec.
+Jangan letakkan GAS_API_SECRET dalam config.js atau mana-mana fail frontend. Ia kekal pada relay dan Script properties Apps Script.
 
-LANGKAH B — CONFIG.JS
-Buka config.js dan ganti:
-  API_URL: 'PASTE_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE'
-
-dengan URL /exec tadi.
-
-Contoh:
-  API_URL: 'https://script.google.com/macros/s/XXXXXXXXXXXX/exec'
-
-LANGKAH C — NEOCITIES
-Upload dengan struktur folder yang sama:
-  index.html
-  config.js
-  assets/app.css
-  assets/app.js
-
-Pastikan folder assets dikekalkan.
-
-PRESTASI
-- Public Search hanya mencari Nama, No. KP dan Tempat Bertugas.
-- Admin memuatkan data sekali selepas login; carian/filter/pagination Admin berlaku terus dalam browser.
-- Tambah/Edit/Sahkan/Padam hanya menulis perubahan yang diperlukan ke Google Sheet.
-- setupSystem/repairImportedRows TIDAK berjalan setiap kali carian.
-
-DATA BAHARU
-- Jika Admin tambah melalui UI: metadata sistem dibuat automatik.
-- Jika data ditampal terus ke Google Sheet: jalankan repairImportedRows() sekali selepas import.
-
-LAPORAN
-- Cetak / Simpan PDF menggunakan dialog Print browser > Save as PDF.
-- Eksport Excel disediakan sebagai CSV UTF-8 yang boleh dibuka terus dalam Microsoft Excel.
-
-KESELAMATAN
-- No. KP Public dipaparkan sebagai ******-**-****.
-- No. KP penuh hanya dihantar selepas login Admin yang sah.
-- Token Admin disimpan dalam sessionStorage browser dan tamat apabila sesi Apps Script tamat.
-- Jangan letakkan password Admin dalam config.js atau app.js.
-
-CATATAN CORS / FETCH
-Frontend menghantar POST dengan Content-Type text/plain dan redirect: follow untuk mengelakkan preflight dan mengikuti redirect ContentService Google Apps Script.
-
-FOOTER
-Created by: Mohd Norais Mohamed Rashid | Powered by: ILKKM SEREMBAN
+PANDUAN API/RELAY
+Rujuk PANDUAN.md dalam e-SO_webhosting_frontend_API.zip yang telah diberikan sebelum ini untuk pemasangan backend dan relay pertama kali.
