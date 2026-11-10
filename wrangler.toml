@@ -1,6 +1,0 @@
-name = "eso-api-relay"
-main = "worker/index.mjs"
-compatibility_date = "2026-11-10"
-
-# Untuk GitHub Pages sahaja: tetapkan GAS_WEB_APP_URL dan ALLOWED_ORIGINS dalam dashboard Worker.
-# Tetapkan GAS_API_SECRET sebagai secret, bukan dalam fail ini.
