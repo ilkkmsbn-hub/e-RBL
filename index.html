@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#075ea8">
+  <meta name="description" content="e-LocalPreceptor - Carian dan pengurusan Local Preceptor Program Diploma Sains Perubatan dan Kesihatan, ILKKM Seremban.">
+  <title>e-LocalPreceptor | ILKKM Seremban</title>
+  <link rel="stylesheet" href="assets/app.css">
+  <script defer src="config.js"></script>
+  <script defer src="assets/app.js"></script>
+</head>
+<body>
+  <div id="appToastHost" class="toast-host" aria-live="polite"></div>
+  <div id="loadingOverlay" class="loading-overlay hidden" aria-hidden="true">
+    <div class="loading-card">
+      <span class="loader-ring"></span>
+      <div><strong id="loadingTitle">Memproses...</strong><small id="loadingText">Sila tunggu sebentar</small></div>
+    </div>
+  </div>
+
+  <main id="publicView" class="public-view">
+    <header class="site-header">
+      <div class="nav-wrap">
+        <a class="brand" href="#" aria-label="e-LocalPreceptor">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.4 7 13 7 13s7-7.6 7-13a7 7 0 0 0-7-7Zm0 10.2A3.2 3.2 0 1 1 12 5.8a3.2 3.2 0 0 1 0 6.4Z"/></svg>
+          </span>
+          <span><strong>e-LocalPreceptor</strong><small>ILKKM Seremban</small></span>
+        </a>
+        <div class="nav-actions">
+          <span class="system-pill"><span class="pulse-dot"></span> Sistem Carian LP</span>
+          <button id="openLoginBtn" class="btn btn-dark btn-compact" type="button">
+            <svg viewBox="0 0 24 24"><path d="M10 17l5-5-5-5v3H3v4h7v3Zm9-14h-8v4h2V5h6v14h-6v-2h-2v4h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2Z"/></svg>
+            Admin
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-section">
+      <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow"><span></span> Pangkalan Data Local Preceptor</span>
+          <h1>Carian Local Preceptor<br><em>lebih pantas & teratur.</em></h1>
+          <p>Semak maklumat Local Preceptor bagi Program Diploma Sains Perubatan dan Kesihatan, ILKKM Seremban menggunakan nama, nombor kad pengenalan atau tempat bertugas.</p>
+          <div class="hero-trust">
+            <span><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.1 3.4 9.7 8 11 4.6-1.3 8-5.9 8-11V5l-8-3Zm-1.1 14.2-3.7-3.7 1.6-1.6 2.1 2.1 4.6-4.6 1.6 1.6-6.2 6.2Z"/></svg> Carian selamat</span>
+            <span><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3V5Zm2 2v2h14V7H5Zm0 4v6h14v-6H5Z"/></svg> Data berpusat</span>
+            <span><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm1 5v4.6l3.2 1.9-1 1.7L11 12.7V7h2Z"/></svg> Status terkini</span>
+          </div>
+        </div>
+
+        <div class="search-card glass-card">
+          <div class="search-card-head">
+            <span class="search-icon-badge"><svg viewBox="0 0 24 24"><path d="m21 19-5.2-5.2a7 7 0 1 0-2 2L19 21l2-2ZM5 10a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"/></svg></span>
+            <div><h2>Semakan Local Preceptor</h2><p>Masukkan sekurang-kurangnya 2 aksara.</p></div>
+          </div>
+          <form id="publicSearchForm" class="public-search-form">
+            <label for="publicSearchInput">Nama / No. Kad Pengenalan / Tempat Bertugas</label>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24"><path d="m21 19-5.2-5.2a7 7 0 1 0-2 2L19 21l2-2ZM5 10a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"/></svg>
+              <input id="publicSearchInput" autocomplete="off" placeholder="Contoh: Ahmad, 8501, Seremban" required>
+              <button class="btn btn-primary search-submit" type="submit">Cari Rekod</button>
+            </div>
+          </form>
+          <div class="search-note"><svg viewBox="0 0 24 24"><path d="M11 17h2v-6h-2v6Zm0-8h2V7h-2v2Zm1-7a10 10 0 1 0 0 20 10 10 0 0 0 0-20Z"/></svg> Nombor kad pengenalan tidak dipaparkan kepada pengguna awam.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <div class="section-shell">
+        <div id="publicEmptyState" class="empty-state welcome-state">
+          <div class="empty-illustration">
+            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="40"/><path d="M42 62a18 18 0 1 1 12-4l14 14-6 6-14-14c-2 .7-4 1-6 1Z"/></svg>
+          </div>
+          <h3>Mulakan carian Local Preceptor</h3>
+          <p>Keputusan yang sepadan akan dipaparkan di sini. Carian hanya menggunakan Nama, No. Kad Pengenalan dan Tempat Bertugas.</p>
+        </div>
+        <div id="publicResults" class="hidden">
+          <div class="results-head">
+            <div><span class="section-kicker">HASIL CARIAN</span><h2 id="resultTitle">Rekod ditemui</h2></div>
+            <div id="resultMeta" class="result-meta"></div>
+          </div>
+          <div id="resultCards" class="result-grid"></div>
+          <div id="publicPagination" class="public-pagination"></div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div><strong>e-LocalPreceptor</strong><span>Program Diploma Sains Perubatan dan Kesihatan</span></div>
+        <p><span>Created by: <strong>Mohd Norais Mohamed Rashid</strong></span><i></i><span>Powered by: <strong>ILKKM SEREMBAN</strong></span></p>
+      </div>
+    </footer>
+  </main>
+
+  <main id="adminView" class="admin-view hidden">
+    <aside id="adminSidebar" class="admin-sidebar">
+      <div class="admin-brand">
+        <span class="brand-mark"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.4 7 13 7 13s7-7.6 7-13a7 7 0 0 0-7-7Zm0 10.2A3.2 3.2 0 1 1 12 5.8a3.2 3.2 0 0 1 0 6.4Z"/></svg></span>
+        <div><strong>e-LocalPreceptor</strong><small>Admin Console</small></div>
+      </div>
+      <div class="admin-user-card">
+        <span id="sidebarAvatar" class="avatar">A</span>
+        <div><strong id="sidebarUserName">Pentadbir</strong><small id="sidebarRole">ADMIN</small></div>
+      </div>
+      <nav class="admin-nav">
+        <button class="nav-item active" data-section="dashboard"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3V3Zm10 0h8v5h-8V3ZM3 13h8v8H3v-8Zm10-3h8v11h-8V10Z"/></svg><span>Dashboard</span></button>
+        <button class="nav-item" data-section="records"><svg viewBox="0 0 24 24"><path d="M4 3h16v18H4V3Zm3 4v2h10V7H7Zm0 4v2h10v-2H7Zm0 4v2h7v-2H7Z"/></svg><span>Rekod LP</span></button>
+        <button class="nav-item" data-section="reports"><svg viewBox="0 0 24 24"><path d="M5 2h10l4 4v16H5V2Zm9 1v4h4M8 11h8v2H8v-2Zm0 4h8v2H8v-2Z"/></svg><span>Laporan & Eksport</span></button>
+      </nav>
+      <div class="admin-side-footer">
+        <span>Created by: Mohd Norais Mohamed Rashid</span>
+        <span>Powered by: ILKKM SEREMBAN</span>
+      </div>
+    </aside>
+    <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+    <section class="admin-main">
+      <header class="admin-topbar">
+        <div class="topbar-title-wrap">
+          <button id="mobileMenuBtn" class="icon-btn mobile-menu" type="button" aria-label="Menu"><svg viewBox="0 0 24 24"><path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z"/></svg></button>
+          <div><span id="adminPageKicker">PENGURUSAN LOCAL PRECEPTOR</span><h1 id="adminPageTitle">Dashboard</h1></div>
+        </div>
+        <div class="topbar-actions">
+          <button id="refreshAdminBtn" class="icon-btn" title="Muat semula data"><svg viewBox="0 0 24 24"><path d="M17.7 6.3A8 8 0 1 0 20 12h-2a6 6 0 1 1-1.8-4.2L13 11h8V3l-3.3 3.3Z"/></svg></button>
+          <div class="topbar-user"><span id="topAvatar" class="avatar small">A</span><div><strong id="topUserName">Admin</strong><small>Administrator</small></div></div>
+          <button id="logoutBtn" class="btn btn-soft-danger btn-compact" type="button">Log Keluar</button>
+        </div>
+      </header>
+
+      <div class="admin-content">
+        <section id="section-dashboard" class="admin-section active">
+          <div class="welcome-banner">
+            <div><span class="eyebrow dark"><span></span> Selamat datang</span><h2 id="welcomeTitle">Dashboard e-LocalPreceptor</h2><p>Pantau status, rekod dan lantikan Local Preceptor daripada satu paparan.</p></div>
+            <button class="btn btn-white" data-open-record-form type="button"><span>＋</span> Tambah Local Preceptor</button>
+          </div>
+          <div id="kpiGrid" class="kpi-grid"></div>
+          <div class="dashboard-layout">
+            <div class="panel">
+              <div class="panel-head"><div><span>PEMANTAUAN</span><h3>Lantikan hampir tamat</h3></div><button class="text-btn" data-go-records="expiring">Lihat semua</button></div>
+              <div id="expiringTable" class="table-wrap"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><div><span>RINGKASAN</span><h3>Local Preceptor mengikut bidang</h3></div></div>
+              <div id="fieldSummary" class="summary-list"></div>
+            </div>
+          </div>
+          <div class="panel recent-panel">
+            <div class="panel-head"><div><span>AKTIVITI DATA</span><h3>Rekod terkini</h3></div><button class="text-btn" data-section-target="records">Buka senarai</button></div>
+            <div id="recentTable" class="table-wrap"></div>
+          </div>
+        </section>
+
+        <section id="section-records" class="admin-section">
+          <div class="page-heading">
+            <div><span class="section-kicker">PANGKALAN DATA</span><h2>Senarai Local Preceptor</h2><p>Carian Admin diproses terus dalam data yang telah dimuatkan untuk respons yang pantas.</p></div>
+            <button class="btn btn-primary" data-open-record-form type="button">＋ Tambah Rekod</button>
+          </div>
+          <div class="records-toolbar">
+            <div class="toolbar-search"><svg viewBox="0 0 24 24"><path d="m21 19-5.2-5.2a7 7 0 1 0-2 2L19 21l2-2ZM5 10a5 5 0 1 1 10 0 5 5 0 0 1-10 0Z"/></svg><input id="adminSearchInput" placeholder="Cari nama, No. KP atau tempat bertugas"></div>
+            <select id="filterField"><option value="">Semua Bidang</option></select>
+            <select id="filterStatus"><option value="">Semua Status</option><option>Masih Aktif</option><option>Hampir Tamat</option><option>Tamat Tempoh</option><option>Tiada Tarikh Tamat</option></select>
+            <select id="filterVerify"><option value="">Semua Pengesahan</option><option>Disahkan</option><option>Belum Disahkan</option></select>
+            <button id="clearFiltersBtn" class="btn btn-light btn-compact" type="button">Reset</button>
+          </div>
+          <div class="panel data-panel">
+            <div class="data-panel-head"><div><strong id="recordCountLabel">0 rekod</strong><span id="recordFilterLabel">Semua data</span></div><div class="view-note">Data Admin dimuatkan sekali untuk carian lebih pantas</div></div>
+            <div id="recordsTable" class="table-wrap records-table-wrap"></div>
+            <div id="adminPagination" class="admin-pagination"></div>
+          </div>
+        </section>
+
+        <section id="section-reports" class="admin-section">
+          <div class="page-heading"><div><span class="section-kicker">DOKUMEN</span><h2>Laporan & Eksport</h2><p>Cetak terus daripada browser atau eksport CSV yang boleh dibuka menggunakan Microsoft Excel.</p></div></div>
+          <div class="report-grid">
+            <article class="report-card blue"><span class="report-icon"><svg viewBox="0 0 24 24"><path d="M6 2h9l4 4v16H6V2Zm8 1v4h4M9 11h7v2H9v-2Zm0 4h7v2H9v-2Z"/></svg></span><h3>Senarai Semua LP</h3><p>Cetak senarai berdasarkan filter semasa. Dalam dialog cetakan pilih <b>Save as PDF</b> untuk menghasilkan PDF.</p><button id="printListBtn" class="btn btn-primary" type="button">Cetak / Simpan PDF</button></article>
+            <article class="report-card green"><span class="report-icon"><svg viewBox="0 0 24 24"><path d="M4 3h16v18H4V3Zm3 4v3h3V7H7Zm5 0v3h5V7h-5ZM7 12v3h3v-3H7Zm5 0v3h5v-3h-5ZM7 17v1h3v-1H7Zm5 0v1h5v-1h-5Z"/></svg></span><h3>Eksport Excel</h3><p>Muat turun data dalam format CSV UTF-8 yang boleh terus dibuka di Excel tanpa mengakses Google Sheet secara manual.</p><button id="exportCsvBtn" class="btn btn-success" type="button">Muat Turun CSV</button></article>
+            <article class="report-card amber"><span class="report-icon"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.1 3.4 9.7 8 11 4.6-1.3 8-5.9 8-11V5l-8-3Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm-5 9.2c1.3-1.6 3-2.2 5-2.2s3.7.6 5 2.2c-1.2 1.6-2.9 2.8-5 3.6-2.1-.8-3.8-2-5-3.6Z"/></svg></span><h3>Laporan Individu</h3><p>Buka mana-mana rekod pada menu Rekod LP dan pilih <b>Cetak Individu</b> untuk laporan rasmi Local Preceptor.</p><button class="btn btn-warning" data-section-target="records" type="button">Pilih Rekod</button></article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="loginModal" class="modal login-modal">
+    <div class="modal-card login-card">
+      <button class="modal-close" data-close-dialog="loginModal" aria-label="Tutup">×</button>
+      <div class="login-brand"><span class="brand-mark large"><svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.4 7 13 7 13s7-7.6 7-13a7 7 0 0 0-7-7Zm0 10.2A3.2 3.2 0 1 1 12 5.8a3.2 3.2 0 0 1 0 6.4Z"/></svg></span><div><span>ADMIN PORTAL</span><h2>Log Masuk Pentadbir</h2><p>Akses pengurusan e-LocalPreceptor.</p></div></div>
+      <form id="loginForm" class="stack-form">
+        <label>ID Pengguna<input id="loginUserId" autocomplete="username" required placeholder="Masukkan ID Admin"></label>
+        <label>Kata Laluan<div class="password-wrap"><input id="loginPassword" type="password" autocomplete="current-password" required placeholder="Masukkan kata laluan"><button id="togglePasswordBtn" type="button" aria-label="Tunjuk kata laluan">◉</button></div></label>
+        <button class="btn btn-primary btn-block" type="submit">Log Masuk</button>
+      </form>
+      <div class="login-security"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5.1 3.4 9.7 8 11 4.6-1.3 8-5.9 8-11V5l-8-3Z"/></svg> Akses Admin dilindungi dengan sesi sementara.</div>
+    </div>
+  </dialog>
+
+  <dialog id="recordModal" class="modal record-modal">
+    <div class="modal-card record-form-card">
+      <div class="modal-head"><div><span id="recordModalKicker">REKOD BAHARU</span><h2 id="recordModalTitle">Tambah Local Preceptor</h2></div><button class="modal-close static" data-close-dialog="recordModal">×</button></div>
+      <form id="recordForm" class="record-form">
+        <input id="formRecordId" type="hidden">
+        <div class="form-grid two"><label>Nama Penuh *<input id="formNama" required></label><label>No. Kad Pengenalan *<input id="formIc" required inputmode="numeric" placeholder="Contoh: 850101-05-1234"></label></div>
+        <div class="form-grid two"><label>Bidang Pos Basik / Sijil Lanjutan *<input id="formBidang" required></label><label>Tempat Bertugas *<input id="formTempat" required></label></div>
+        <div class="form-grid three"><label>Jawatan<input id="formJawatan"></label><label>Gred<input id="formGred"></label><label>Pengalaman<input id="formPengalaman" placeholder="Contoh: 8 Tahun"></label></div>
+        <div class="form-grid three"><label>Tarikh Lantikan LP<input id="formStart" type="date"></label><label>Tarikh Tamat Lantikan LP<input id="formEnd" type="date"></label><label>Status Pengesahan<select id="formVerification"><option>Belum Disahkan</option><option>Disahkan</option></select></label></div>
+        <div class="form-grid two"><label>Catatan<textarea id="formCatatan" rows="3"></textarea></label><label>Catatan 2<textarea id="formCatatan2" rows="3"></textarea></label></div>
+        <div class="modal-actions"><button class="btn btn-light" type="button" data-close-dialog="recordModal">Batal</button><button class="btn btn-primary" type="submit">Simpan Rekod</button></div>
+      </form>
+    </div>
+  </dialog>
+
+  <dialog id="detailModal" class="modal detail-modal">
+    <div class="modal-card detail-card">
+      <div class="modal-head"><div><span>MAKLUMAT LOCAL PRECEPTOR</span><h2 id="detailName">—</h2></div><button class="modal-close static" data-close-dialog="detailModal">×</button></div>
+      <div id="detailContent" class="detail-grid"></div>
+      <div class="modal-actions"><button id="detailPrintBtn" class="btn btn-dark" type="button">Cetak Individu</button><button id="detailEditBtn" class="btn btn-primary" type="button">Edit Rekod</button></div>
+    </div>
+  </dialog>
+</body>
+</html>
